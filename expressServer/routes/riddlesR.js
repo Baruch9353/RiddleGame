@@ -9,11 +9,11 @@ import {
 
 const router = express.Router();
 
-router.get('/riddles', getAllRiddlesHandler);
-router.get('/riddles/:id', getRiddleHandler);
-router.post('/riddles', createRiddleHandler);
-router.put('/riddles/:id', updateRiddleHandler);
-router.delete('/riddles/:id', deleteRiddleHandler);
+router.get('/', getAllRiddlesHandler);
+router.get('/:id', getRiddleHandler);
+router.post('/', createRiddleHandler);
+router.put('/:id', updateRiddleHandler);
+router.delete('/:id', deleteRiddleHandler);
 
 export default router;
 

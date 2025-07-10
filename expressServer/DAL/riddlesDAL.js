@@ -1,9 +1,9 @@
 import { readFile, writeFile } from 'fs/promises';
 
-const riddlesFile = './data/riddles.txt';
+const path = './data/riddles.txt';
 
 export async function getAllRiddles() {
-  const data = await readFile(riddlesFile, 'utf8');
+  const data = await readFile(path, 'utf8');
   return JSON.parse(data);
 }
 
@@ -24,7 +24,7 @@ export async function addRiddle(newRiddle) {
   };
 
   riddles.push(riddleToAdd);
-  await writeFile(riddlesFile, JSON.stringify(riddles, null, 2));
+  await writeFile(path, JSON.stringify(riddles, null, 2));
   return riddleToAdd;
 }
 
@@ -45,7 +45,7 @@ export async function updateRiddle(id, updatedData) {
   };
 
   riddles[index] = updatedRiddle;
-  await writeFile(riddlesFile, JSON.stringify(riddles, null, 2));
+  await writeFile(path, JSON.stringify(riddles, null, 2));
   return updatedRiddle;
 }
 
@@ -54,7 +54,7 @@ export async function deleteRiddle(id) {
   const riddles = await getAllRiddles();
   const updatedRiddles = riddles.filter(r => r.id !== id);
 
-  await writeFile(riddlesFile, JSON.stringify(updatedRiddles, null, 2));
+  await writeFile(path, JSON.stringify(updatedRiddles, null, 2));
   return true;
 }
 
