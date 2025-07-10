@@ -28,23 +28,19 @@ export async function createRiddleHandler(req, res) {
 export async function updateRiddleHandler(req, res) {
   const id = Number(req.params.id);
   const { name, taskDescription, correctAnswer } = req.body;
-
-  const updatedData = {};
-  if (name) updatedData.name = name;
-  if (taskDescription) updatedData.taskDescription = taskDescription;
-  if (correctAnswer) updatedData.correctAnswer = correctAnswer;
-
-  const updatedRiddle = await updateRiddle(id, updatedData);
-  if (!updatedRiddle) return res.status(404).send('Riddle not found');
-
-  res.json(updatedRiddle);
+  if (!name || !taskDescription || !correctAnswer) {
+    return res.status(400).send("All fields are required");
+  }
+  const updated = await updateRiddle(id, { name, taskDescription, correctAnswer });
+  if (!updated) return res.status(404).send("Riddle not found");
+  res.json(updated);
 }
+
 
 // Handles DELETE /riddles/:id - deletes a riddle by ID
 export async function deleteRiddleHandler(req, res) {
   const id = Number(req.params.id);
   const deleted = await deleteRiddle(id);
   if (!deleted) return res.status(404).send('Riddle not found');
-
   res.send("deleted");
 }

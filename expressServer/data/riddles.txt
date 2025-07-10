@@ -16,11 +16,5 @@
     "name": "winner war",
     "taskDescription": "Who won the war, Israel or Iran?",
     "correctAnswer": "Israel"
-  },
-  {
-    "id": 4,
-    "name": "baruch`s age",
-    "taskDescription": "How old is bar?",
-    "correctAnswer": "23"
   }
 ]
