@@ -19,8 +19,8 @@
   },
   {
     "id": 4,
-    "name": "New Riddle",
-    "taskDescription": "What has hands but can’t clap?",
-    "correctAnswer": "Clock"
+    "name": "baruch`s age",
+    "taskDescription": "How old is bar?",
+    "correctAnswer": "23"
   }
 ]
