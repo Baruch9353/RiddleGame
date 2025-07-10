@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(logger);
 
-app.use('/', riddlesRouter); 
+app.use('/riddles', riddlesRouter); 
 
 
 app.use((req, res) => {
