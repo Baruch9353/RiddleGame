@@ -1,11 +1,19 @@
 import express from 'express';
-import { getAllRiddles, getRiddle, createRiddle } from '../ctrl/ctrlRiddles.js';
+import {
+  getAllRiddlesHandler,
+  getRiddleHandler,
+  createRiddleHandler,
+  updateRiddleHandler,
+  deleteRiddleHandler
+} from '../ctrl/ctrlRiddles.js';
 
 const router = express.Router();
 
-router.get('/', getAllRiddles);
-router.get('/:id', getRiddle);
-router.post('/', createRiddle);
+router.get('/', getAllRiddlesHandler);
+router.get('/:id', getRiddleHandler);
+router.post('/', createRiddleHandler);
+router.put('/:id', updateRiddleHandler);
+router.delete('/:id', deleteRiddleHandler);
 
 export default router;
 
