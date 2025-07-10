@@ -15,7 +15,14 @@ export async function getRiddleById(id) {
 export async function addRiddle(newRiddle) {
   const riddles = await getAllRiddles();
   const id = riddles.length > 0 ? riddles[riddles.length - 1].id + 1 : 1;
-  const riddleToAdd = { id, ...newRiddle };
+
+  const riddleToAdd = {
+    id: id,
+    name: newRiddle.name,
+    taskDescription: newRiddle.taskDescription,
+    correctAnswer: newRiddle.correctAnswer
+  };
+
   riddles.push(riddleToAdd);
   await writeFile(riddlesFile, JSON.stringify(riddles, null, 2));
   return riddleToAdd;
@@ -27,17 +34,27 @@ export async function updateRiddle(id, updatedData) {
   const index = riddles.findIndex(r => r.id === id);
   if (index === -1) return null;
 
-  riddles[index] = { ...riddles[index], ...updatedData, id }; // keep id intact
+  if (!updatedData.name || !updatedData.taskDescription || !updatedData.correctAnswer) {
+    return null;}
+
+  const updatedRiddle = {
+    id: id,
+    name: updatedData.name,
+    taskDescription: updatedData.taskDescription,
+    correctAnswer: updatedData.correctAnswer
+  };
+
+  riddles[index] = updatedRiddle;
   await writeFile(riddlesFile, JSON.stringify(riddles, null, 2));
-  return riddles[index];
+  return updatedRiddle;
 }
 
 // Delete a riddle by id
 export async function deleteRiddle(id) {
-  let riddles = await getAllRiddles();
-  const lengthBefore = riddles.length;
-  riddles = riddles.filter(r => r.id !== id);
-  if (riddles.length === lengthBefore) return false; // no deletion happened
-  await writeFile(riddlesFile, JSON.stringify(riddles, null, 2));
+  const riddles = await getAllRiddles();
+  const updatedRiddles = riddles.filter(r => r.id !== id);
+
+  await writeFile(riddlesFile, JSON.stringify(updatedRiddles, null, 2));
   return true;
 }
+
