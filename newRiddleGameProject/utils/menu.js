@@ -4,7 +4,7 @@ import { playGame } from './play.js';
 import { showLeaderboard } from './leaderboard.js';
 import { manageRiddles } from './riddleManager.js';
 
-export function menu() {
+export async function menu() {
   const playerName = readline.question("What is your name? ");
   console.log(`        Hi ${playerName}!
 Welcome to the Riddle Game!
@@ -14,16 +14,16 @@ Welcome to the Riddle Game!
    1. Play the game
    2. Manage riddles
    3. View leaderboard
-   4. Exit'`);
+   4. Exit`);
 
     const choice = readline.question('Choose an option: ');
 
     switch (choice) {
       case '1':
-        playGame(playerName);
+        await playGame(playerName);
         break;
       case '2':
-        manageRiddles();
+        await manageRiddles();
         break;
       case '3':
         showLeaderboard();
