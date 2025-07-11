@@ -42,5 +42,5 @@ export async function deleteRiddleHandler(req, res) {
   const id = Number(req.params.id);
   const deleted = await deleteRiddle(id);
   if (!deleted) return res.status(404).send('Riddle not found');
-  res.send("deleted");
+  res.status(200).json({ deleted: true });
 }

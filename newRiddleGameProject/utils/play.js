@@ -1,17 +1,20 @@
-// Runs the riddle game
 import fs from 'fs';
 import { Riddle } from '../classes/Riddle.js';
 import { Player } from '../classes/Player.js';
 
-export function playGame(name) {
-  const riddles = JSON.parse(fs.readFileSync('./riddles/db.txt'));
+
+export async function playGame(name) {
+  const res = await fetch('http://localhost:3000/riddles');
+  if (!res.ok) throw new Error(`Failed to fetch riddles: ${res.status}`);
+  const riddles = await res.json();
+
   const player = new Player(name);
 
   for (const data of riddles) {
     const riddle = new Riddle(data);
     console.log(`\nRiddle ${riddle.id}: ${riddle.name}`);
     const start = Date.now();
-    riddle.ask();
+    await riddle.ask();
     const end = Date.now();
     player.recordTime(start, end);
   }
