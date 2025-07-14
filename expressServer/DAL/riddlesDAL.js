@@ -2,16 +2,19 @@ import { readFile, writeFile } from 'fs/promises';
 
 const path = './data/riddles.txt';
 
+// Get all riddles
 export async function getAllRiddles() {
   const data = await readFile(path, 'utf8');
   return JSON.parse(data);
-}
+};
 
+// Get a riddle by id
 export async function getRiddleById(id) {
   const riddles = await getAllRiddles();
   return riddles.find(r => r.id === id);
-}
+};
 
+// Add a riddle
 export async function addRiddle(newRiddle) {
   const riddles = await getAllRiddles();
   const id = riddles.length > 0 ? riddles[riddles.length - 1].id + 1 : 1;

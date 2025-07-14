@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "baruch",
-    "lowestTime": 8.572
+    "lowestTime": 8.358
   },
   {
     "id": 2,
