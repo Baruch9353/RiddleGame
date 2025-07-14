@@ -1,12 +1,12 @@
 import express from 'express';
-import riddlesRouter from './routes/riddlesR.js';
+import riddlesConfigRoutes from './routes/configRoutes.js';
 import logger from './middlewares/logger.js';
 
 const app = express();
 app.use(express.json());
 app.use(logger);
 
-app.use('/riddles', riddlesRouter); 
+riddlesConfigRoutes(app); 
 
 
 app.use((req, res) => {
