@@ -1,4 +1,4 @@
-import { getAllRiddles, getRiddleById, addRiddle, updateRiddle, deleteRiddle } from '../DAL/riddlesDAL.js';
+import { getAllRiddles, getRiddleById, addRiddle, updateRiddle, deleteRiddle } from '../DAL/riddlesDall.js';
 
 // Handles GET /riddles - returns all riddles
 export async function getAllRiddlesHandler(req, res) {
@@ -6,9 +6,9 @@ export async function getAllRiddlesHandler(req, res) {
   res.json(riddles);
 }
 
-// Handles GET /riddles/:id - returns a specific riddle by ID
+// Handles GET /riddles/:id - returns a specific riddle by ID (MongoDB _id string)
 export async function getRiddleHandler(req, res) {
-  const id = Number(req.params.id);
+  const id = req.params.id; 
   const riddle = await getRiddleById(id);
   if (!riddle) return res.status(404).send('Riddle not found');
   res.json(riddle);
@@ -24,9 +24,9 @@ export async function createRiddleHandler(req, res) {
   res.status(201).json(newRiddle);
 }
 
-// Handles PUT /riddles/:id - updates an existing riddle
+// Handles PUT /riddles/:id - updates an existing riddle by MongoDB _id string
 export async function updateRiddleHandler(req, res) {
-  const id = Number(req.params.id);
+  const id = req.params.id; 
   const { name, taskDescription, correctAnswer } = req.body;
   if (!name || !taskDescription || !correctAnswer) {
     return res.status(400).send("All fields are required");
@@ -36,10 +36,9 @@ export async function updateRiddleHandler(req, res) {
   res.json(updated);
 }
 
-
-// Handles DELETE /riddles/:id - deletes a riddle by ID
+// Handles DELETE /riddles/:id - deletes a riddle by MongoDB _id string
 export async function deleteRiddleHandler(req, res) {
-  const id = Number(req.params.id);
+  const id = req.params.id; 
   const deleted = await deleteRiddle(id);
   if (!deleted) return res.status(404).send('Riddle not found');
   res.status(200).json({ deleted: true });
