@@ -4,12 +4,10 @@ export class Player {
     this.name = name;
     this.times = [];
   }
-
   // Records time taken for a riddle
   recordTime(start, end) {
     this.times.push((end - start) / 1000);
   }
-
   // Shows total and average time
   showStats() {
     const total = this.times.reduce((a, b) => a + b, 0);

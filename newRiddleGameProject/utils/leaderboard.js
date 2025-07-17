@@ -7,6 +7,6 @@ export function showLeaderboard() {
 
   console.log('\nLeaderboard:');
   players.forEach((p, i) => {
-    console.log(`${i + 1}. ${p.name} - ${p.lowestTime.toFixed(2)} seconds`);
+    console.log(`${i + 1}. ${p.name} - ${p.lowestTime.toFixed(2)} seconds.`);
   });
 }
