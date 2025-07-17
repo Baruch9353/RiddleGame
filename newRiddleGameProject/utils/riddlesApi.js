@@ -26,6 +26,12 @@ export async function readRiddles() {
   const riddles = await fetchJson(baseUrl);
   console.log('All riddles from server:', riddles);
 }
+// Read riddle by _id
+export async function readRiddleById() {
+  const id = readline.question('Enter riddle ID: ');
+  const riddles = await fetchJson(`${baseUrl}/${id}`);
+  console.log(`Riddle ${id} from server:`, riddles);
+}
 // Update a riddle by ID
 export async function updateRiddle() {
   const id = readline.question('Enter riddle ID to update: ');

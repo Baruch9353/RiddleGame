@@ -1,12 +1,13 @@
 import readline from 'readline-sync';
-import { createRiddle, readRiddles, updateRiddle, deleteRiddle } from './riddlesApi.js';
+import {readRiddles, readRiddleById, createRiddle, updateRiddle, deleteRiddle } from './riddlesApi.js';
 
 export async function manageRiddles() {
   console.log('\nRiddle Manager');
   console.log('1. Create');
   console.log('2. Read (all riddles)');
-  console.log('3. Update');
-  console.log('4. Delete');
+  console.log('3. Read riddle by _id');
+  console.log('4. Update');
+  console.log('5. Delete');
 
   const choice = readline.question('Choose an option: ');
 
@@ -19,9 +20,12 @@ export async function manageRiddles() {
         await readRiddles();
         break;
       case '3':
+        await readRiddleById();
+        break;   
+      case '4':
         await updateRiddle();
         break;
-      case '4':
+      case '5':
         await deleteRiddle();
         break;
       default:
