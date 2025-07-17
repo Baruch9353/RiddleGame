@@ -20,45 +20,23 @@ export async function getRiddleById(id) {
 // Add a new riddle
 export async function addRiddle(newRiddle) {
   const collection = await riddlesCollection();
-
-  const riddleToAdd = {
-    name: newRiddle.name,
-    taskDescription: newRiddle.taskDescription,
-    correctAnswer: newRiddle.correctAnswer
-  };
-
-  const result = await collection.insertOne(riddleToAdd);
-  return { _id: result.insertedId, ...riddleToAdd };
+  return await collection.insertOne(newRiddle);
 }
 
 // Update a riddle (does not return updated document, only success status)
 export async function updateRiddle(id, updatedData) {
   try {
     const collection = await riddlesCollection();
-
-    const result = await collection.updateOne(
-      { _id: new ObjectId(id) },
-      {
-        $set: {
-          name: updatedData.name,
-          taskDescription: updatedData.taskDescription,
-          correctAnswer: updatedData.correctAnswer
-        }
-      }
-    );
-
-    return result.modifiedCount === 1; // if update tru, else false
+    return await collection.updateOne({ _id: new ObjectId(id) },{$set: {updatedData}});
   } catch {
     return false;
   }
 }
-
 // Delete a riddle
 export async function deleteRiddle(id) {
   try {
     const collection = await riddlesCollection();
-    const result = await collection.deleteOne({ _id: new ObjectId(id) });
-    return result.deletedCount === 1;
+    return await collection.deleteOne({ _id: new ObjectId(id) });
   } catch {
     return false;
   }
