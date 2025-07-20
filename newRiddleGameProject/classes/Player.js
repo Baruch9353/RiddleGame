@@ -15,6 +15,6 @@ export class Player {
     const avg = total / this.times.length;
     console.log(`\nTotal time: ${total.toFixed(2)} seconds`);
     console.log(`Average per riddle: ${avg.toFixed(2)} seconds`);
-    return avg;
+    return avg.toFixed(2);
   }
 }
