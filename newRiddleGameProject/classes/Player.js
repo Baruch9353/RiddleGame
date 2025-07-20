@@ -1,6 +1,7 @@
 // Tracks player name and time stats
 export class Player {
-  constructor(name) {
+  constructor(id, name) {
+    this.id = id;
     this.name = name;
     this.times = [];
   }

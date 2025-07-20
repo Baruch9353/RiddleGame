@@ -9,7 +9,7 @@ export async function getAllPlayersController(req, res) {
 // Create a new player
 export async function createPlayerController(req, res) {
     const player = req.body;
-    if (!player.id || !player.name || player.lowestTime === undefined) {
+    if (!player.id || !player.name || !player.lowestTime) {
       return res.status(400).json({ error: 'Missing required fields: id, name, lowestTime' });
     }
     const newPlayer = await createPlayer(player);

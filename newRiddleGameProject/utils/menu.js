@@ -26,7 +26,7 @@ Welcome to the Riddle Game!
         await manageRiddles();
         break;
       case '3':
-        showLeaderboard();
+        await showLeaderboard();
         break;
       case '4':
         return;
