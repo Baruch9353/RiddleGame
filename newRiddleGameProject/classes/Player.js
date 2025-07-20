@@ -1,9 +1,9 @@
 // Tracks player name and time stats
 export class Player {
-  constructor(id, name) {
+  constructor(id, name, times) {
     this.id = id;
     this.name = name;
-    this.times = [];
+    this.times = times || [];
   }
   // Records time taken for a riddle
   recordTime(start, end) {
