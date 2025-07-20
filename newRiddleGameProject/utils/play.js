@@ -1,5 +1,6 @@
-import fs from 'fs';
+// import fs from 'fs';
 import { Riddle } from '../classes/Riddle.js';
+import { getAllPlayers, createPlayer, updatePlayer } from '../players/playersApi.js'
 import { Player } from '../classes/Player.js';
 
 
@@ -23,18 +24,14 @@ export async function playGame(name) {
   updatePlayerScore(name, player.times.reduce((a, b) => a + b, 0));
 }
 
-function updatePlayerScore(name, time) {
-  const path = './players/players.txt';
-  const players = JSON.parse(fs.readFileSync(path));
+async function updatePlayerScore(name, time) {
+  const players = await getAllPlayers();
   const player = players.find(p => p.name === name);
 
   if (!player) {
-    players.push({ id: players.length + 1, name, lowestTime: time });
-    console.log('New player added.');
+    const p = { id: players.length + 1, name, lowestTime: time };
+    await createPlayer(p);
   } else if (time < player.lowestTime) {
-    player.lowestTime = time;
-    console.log('New record! Time updated.');
+    await updatePlayer(player.id, { lowestTime: time });
   }
-
-  fs.writeFileSync(path, JSON.stringify(players, null, 2));
-}
+};
