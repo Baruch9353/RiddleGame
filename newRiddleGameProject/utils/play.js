@@ -15,7 +15,7 @@ export async function playGame(name) {
     const riddle = new Riddle(data);
     console.log(`\nRiddle ${riddle.id}: ${riddle.name}`);
     const start = Date.now();
-    await riddle.ask();
+    riddle.ask();
     const end = Date.now();
     player.recordTime(start, end);
   }
