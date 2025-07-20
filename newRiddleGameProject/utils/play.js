@@ -1,8 +1,6 @@
-// import fs from 'fs';
 import { Riddle } from '../classes/Riddle.js';
 import { getAllPlayers, createPlayer, updatePlayer } from '../players/playersApi.js'
 import { Player } from '../classes/Player.js';
-
 
 export async function playGame(name) {
   const res = await fetch('http://localhost:3000/riddles');
@@ -20,8 +18,8 @@ export async function playGame(name) {
     player.recordTime(start, end);
   }
 
-  player.showStats();
-  updatePlayerScore(name, player.times.reduce((a, b) => a + b, 0));
+  const avg = player.showStats();
+  updatePlayerScore(name, avg);
 }
 
 async function updatePlayerScore(name, time) {
