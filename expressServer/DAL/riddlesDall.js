@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { riddlesCollection } from "../collection/riddleModel.js";
+import { riddlesCollection } from "../collection/riddleCollection.js";
 
 // Get all riddles
 export async function getAllRiddles() {
