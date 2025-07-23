@@ -21,4 +21,3 @@ export async function connectToMongo() {
   return db;
 };
 
-await connectToMongo();
