@@ -6,6 +6,8 @@ export async function getAllPlayersController(req, res) {
     res.json(players); 
 }
 // Create a new player
+// This route isn't essential because users are created as players during signup,
+// but it's kept as an optional utility for potential future use.
 export async function createPlayerController(req, res) {
     const player = req.body;
     if (!player.id || !player.name || !player.lowestTime) {

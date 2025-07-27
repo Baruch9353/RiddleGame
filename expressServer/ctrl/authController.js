@@ -7,7 +7,7 @@ function setAuthCookie(res, token) {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
-    maxAge: 3 * 24 * 60 * 60 * 1000,
+    maxAge: 3 * 24 * 60 * 60 * 1000 * 100,
   });
 }
 // Handle user signup
@@ -20,7 +20,7 @@ export async function signup(req, res) {
   const role = adminCode === process.env.ADMIN_CODE ? "admin" : "user";
   await createPlayer(username, password_hash, role);
   const token = jwt.sign({ username, role }, process.env.JWT_SECRET, {
-    expiresIn: '3d', 
+    expiresIn: '100d', 
   });
   setAuthCookie(res, token);
   res.status(201).json({ message: "User created", username, role });
@@ -33,7 +33,7 @@ export async function login(req, res) {
   const isValid = await bcrypt.compare(password, user.password_hash);
   if (!isValid) return res.status(403).send("Wrong password");
   const token = jwt.sign({ username, role: user.role }, process.env.JWT_SECRET, {
-    expiresIn: '3d',
+    expiresIn: '100d',
   });
   setAuthCookie(res, token);
   res.json({ message: "Login successful", username, role: user.role });
