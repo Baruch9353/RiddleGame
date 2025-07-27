@@ -1,4 +1,3 @@
-
 {
   "name": "expressexercises09_07",
   "version": "1.0.0",
@@ -12,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "readline-sync": "^1.4.10"

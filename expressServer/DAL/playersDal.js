@@ -13,19 +13,6 @@ export async function getAllPlayers() {
     throw error;
   }
 }
-// Create a new player
-export async function createPlayer(player) {
-  try {
-    const { data, error } = await supabaseConnect
-      .from("players")
-      .insert([player]);
-    if (error) throw new Error("Failed to create player: " + error.message);
-    return "Player created successfully";
-  } catch (error) {
-    console.error("Error in createPlayer:", error);
-    throw error;
-  }
-}
 // Update a player by id
 export async function updatePlayer(id, updatedFields) {
   try {
@@ -56,7 +43,7 @@ export async function getUserByUsername(username) {
   }
 }
 // Create user with username, hashed password and role
-export async function createUser(username, password_hash, role = "user") {
+export async function createPlayer(username, password_hash, role = "user") {
   try {
     const { data, error } = await supabaseConnect
       .from("players")

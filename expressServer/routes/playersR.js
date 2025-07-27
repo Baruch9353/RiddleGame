@@ -1,18 +1,20 @@
 import express from 'express';
 import {
-    getAllPlayersController,
-    createPlayerController,
-    updatePlayerController,
+  getAllPlayersController,
+  createPlayerController,
+  updatePlayerController,
 } from '../ctrl/ctrlPlayers.js';
-import { verifyToken, requireRole } from '../middlewares/auth.js';
-import authorizeRole from '../middlewares/authorizeRole.js';
+import { signup, login } from '../ctrl/authController.js';
 
 const router = express.Router();
 
-router.get('/', verifyToken, authorizeRole('admin'), getAllPlayersController);
+router.post('/signup', signup);
+router.post('/login', login);
 
-router.post('/', verifyToken, requireRole(['user', 'admin']), createPlayerController);
+router.get('/', getAllPlayersController);
 
-router.put('/:id', verifyToken, requireRole(['admin']), updatePlayerController);
+router.post('/createPlayer', createPlayerController);
+
+router.put('/:id', updatePlayerController);
 
 export default router;
