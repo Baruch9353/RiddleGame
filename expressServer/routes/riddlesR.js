@@ -10,8 +10,8 @@ import { verifyToken, requireRole } from '../middlewares/auth.js';
 
 const router = express.Router();
 
-router.get('/', verifyToken, requireRole(['user', 'admin']), getAllRiddlesHandler);
-router.get('/:id', getRiddleHandler);
+router.get('/',getAllRiddlesHandler);
+router.get('/:id', verifyToken, requireRole(['user', 'admin']), getRiddleHandler);
 
 router.post('/', verifyToken, requireRole(['user', 'admin']), createRiddleHandler);
 

@@ -21,7 +21,8 @@ export async function updatePlayer(id, updatedFields) {
       .update(updatedFields)
       .eq("id", id);
     if (error) throw new Error("Failed to update player: " + error.message);
-    return "Player updated successfully";
+    return { message: 'Player updated successfully' };
+
   } catch (error) {
     console.error("Error in updatePlayer:", error);
     throw error;
@@ -35,7 +36,7 @@ export async function getUserByUsername(username) {
       .select("*")
       .eq("username", username)
       .single();
-    if (error) return null; // החזר null אם המשתמש לא נמצא
+    if (error) return null; 
     return data;
   } catch (error) {
     console.error("Error in getUserByUsername:", error);
