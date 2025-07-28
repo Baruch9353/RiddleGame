@@ -5,7 +5,6 @@ export async function getAllRiddlesHandler(req, res) {
   const riddles = await getAllRiddles();
   res.json(riddles);
 }
-
 // Handles GET /riddles/:id - returns a specific riddle by ID (MongoDB _id string)
 export async function getRiddleHandler(req, res) {
   const id = req.params.id; 
@@ -13,7 +12,6 @@ export async function getRiddleHandler(req, res) {
   if (!riddle) return res.status(404).send('Riddle not found');
   res.json(riddle);
 }
-
 // Handles POST /riddles - creates a new riddle
 export async function createRiddleHandler(req, res) {
   const { name, taskDescription, correctAnswer } = req.body;
@@ -23,8 +21,7 @@ export async function createRiddleHandler(req, res) {
   const newRiddle = await addRiddle({ name, taskDescription, correctAnswer });
   res.status(201).json(newRiddle);
 }
-
-// Handles PUT /riddles/:id - updates an existing riddle by MongoDB _id string
+// Handles PUT /riddles/:id - updates an existing riddle
 export async function updateRiddleHandler(req, res) {
   const id = req.params.id; 
   const { name, taskDescription, correctAnswer } = req.body;

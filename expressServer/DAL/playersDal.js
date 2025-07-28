@@ -13,19 +13,6 @@ export async function getAllPlayers() {
     throw error;
   }
 }
-// Create a new player
-export async function createPlayer(player) {
-  try {
-    const { data, error } = await supabaseConnect
-      .from("players")
-      .insert([player]);
-    if (error) throw new Error("Failed to create player: " + error.message);
-    return "Player created successfully";
-  } catch (error) {
-    console.error("Error in createPlayer:", error);
-    throw error;
-  }
-}
 // Update a player by id
 export async function updatePlayer(id, updatedFields) {
   try {
@@ -34,7 +21,8 @@ export async function updatePlayer(id, updatedFields) {
       .update(updatedFields)
       .eq("id", id);
     if (error) throw new Error("Failed to update player: " + error.message);
-    return "Player updated successfully";
+    return { message: 'Player updated successfully' };
+
   } catch (error) {
     console.error("Error in updatePlayer:", error);
     throw error;
@@ -48,7 +36,7 @@ export async function getUserByUsername(username) {
       .select("*")
       .eq("username", username)
       .single();
-    if (error) return null; // החזר null אם המשתמש לא נמצא
+    if (error) return null; 
     return data;
   } catch (error) {
     console.error("Error in getUserByUsername:", error);
@@ -56,7 +44,7 @@ export async function getUserByUsername(username) {
   }
 }
 // Create user with username, hashed password and role
-export async function createUser(username, password_hash, role = "user") {
+export async function createPlayer(username, password_hash, role = "user") {
   try {
     const { data, error } = await supabaseConnect
       .from("players")
