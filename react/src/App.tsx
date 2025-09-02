@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -9,7 +9,7 @@ import AdminRiddles from "./pages/AdminRiddles";
 
 export default function App() {
   return (
-    <div>
+    <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -19,6 +19,6 @@ export default function App() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/admin" element={<AdminRiddles />} />
       </Routes>
-    </div>
+    </>
   );
 }
