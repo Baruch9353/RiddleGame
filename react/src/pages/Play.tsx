@@ -15,7 +15,7 @@ export default function Play() {
 
     return (
         <div>
-            <h1>Play Riddle Game</h1>
+            <h2>Play Riddle Game</h2>
             <p>{riddles[0].question}</p>
             <input
                 type="text"

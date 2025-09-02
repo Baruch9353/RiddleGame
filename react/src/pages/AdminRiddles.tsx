@@ -12,7 +12,6 @@ export default function AdminRiddles() {
 
     return (
         <div>
-            <h1>Admin - Manage Riddles</h1>
             <input
                 type="text"
                 placeholder="Enter new riddle"
