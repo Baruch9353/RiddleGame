@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Play from "./pages/Play";
 import Leaderboard from "./pages/Leaderboard";
 import AdminRiddles from "./pages/AdminRiddles";
+import "./App.css";
 
 export default function App() {
   return (
