@@ -1,6 +1,6 @@
 [build]
   # Directory to change to before starting a build
-  base = "."
+  base = "./react"
   
   # Directory that contains the deploy-ready HTML files and assets
   publish = "dist"
