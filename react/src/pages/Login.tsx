@@ -7,18 +7,19 @@ export default function Login() {
     const [message, setMessage] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
     const [role, setRole] = useState("");
-    const [error, setError] = useState(""); // 💡 הודעת שגיאה
+    const [error, setError] = useState("");
 
-    // Check after page load: If there is a token, logged in and role is set
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
             try {
                 const payload = JSON.parse(atob(token.split(".")[1]));
-                setRole(payload.role);
-                setLoggedIn(true);
-            } catch (err) {
-                console.error("Invalid token", err);
+                if (payload.username && payload.role) {
+                    setRole(payload.role);
+                    setLoggedIn(true);
+                    setMessage(`Welcome back, ${payload.username}!`);
+                }
+            } catch {
                 localStorage.removeItem("token");
             }
         }
@@ -26,7 +27,8 @@ export default function Login() {
 
     const submit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(""); 
+        setError("");
+        setMessage("");
         try {
             const res = await fetch("http://localhost:3000/players/login", {
                 method: "POST",
@@ -39,32 +41,39 @@ export default function Login() {
                 setLoggedIn(true);
                 setRole(data.role);
                 setMessage(`Logged in as ${data.role}`);
-
                 if (data.token) localStorage.setItem("token", data.token);
             } else {
-                const errorMsg = data.message || "Invalid username or password";
-                setError(errorMsg);
+                setError(data.message || "Invalid username or password");
             }
 
             setUsername("");
             setPassword("");
-        } catch (err: any) {
+        } catch {
             setError("An error occurred while logging in");
         }
     };
 
     return (
         <div>
-            {!loggedIn ? (
-                <form onSubmit={submit}>
-                    <input value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
-                    <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" type="password" />
-                    <button type="submit">Login</button>
-                    {error && <p>{error}</p>}
-                </form>
-            ) : (
+            <form onSubmit={submit}>
+                <input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                />
+                <button type="submit">Login</button>
+                {error && <p>{error}</p>}
+            </form>
+
+            {loggedIn && (
                 <div>
-                    <p>{message}</p>
+                    <p style={{ color: "green" }}>{message}</p>
                     <Link to="/play"><button>Play</button></Link>
                     <Link to="/leaderboard"><button>Leaderboard</button></Link>
                     {role === "admin" && <Link to="/admin"><button>Admin Riddles</button></Link>}
