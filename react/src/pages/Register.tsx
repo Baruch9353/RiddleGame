@@ -16,7 +16,10 @@ export default function Register() {
                 body: JSON.stringify({ username, password, adminCode }),
             });
             const data = await res.json();
-            setMessage(res.ok ? `Registered as ${data.role}` : `Error: ${data.message}`);
+
+            if (data.token) localStorage.setItem("token", data.token);
+
+            setMessage(res.ok ? `Registered as ${data.role}. Now you can ` : `Error: ${data.message}`);
             setUsername(""); setPassword(""); setAdminCode("");
         } catch (err: any) {
             setMessage(`Error: ${err.message}`);
@@ -31,7 +34,7 @@ export default function Register() {
                 <input value={adminCode} onChange={e => setAdminCode(e.target.value)} placeholder="Admin Code (optional)" />
                 <button type="submit">Register</button>
             </form>
-            {message && <p>{message} <Link to="/login">Login</Link></p>}
+            {message && <p>{message} <Link to="/login">👉Login</Link></p>}
         </div>
     );
 }
