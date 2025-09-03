@@ -29,7 +29,7 @@ export async function signup(req, res) {
 
     //adminCode
     const role = adminCode === process.env.ADMIN_CODE ? "admin" : "user";
-    console.log("Signup:", { username, adminCode, role });
+    console.log("new admin signup:", { username });
 
     await createPlayer(username, password_hash, role);
 
