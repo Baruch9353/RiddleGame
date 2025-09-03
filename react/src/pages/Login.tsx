@@ -3,14 +3,16 @@ import { Link } from "react-router";
 
 export default function Login() {
     const [username, setUsername] = useState("");
+    const [password, setPassword] = useState(""); // סיסמה
     const [message, setMessage] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false); // מצב מחובר
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setMessage(`Logging in as: ${username}`);
+        setMessage(`Logged in as: ${username}`);
+        setLoggedIn(true); // מסמן שנכנס
         setUsername("");
-        setLoggedIn(true);
+        setPassword("");
     };
 
     return (
@@ -23,13 +25,21 @@ export default function Login() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
+                    <br />
+                    <input
+                        type="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
                     <button type="submit">Login</button>
                 </form>
             ) : (
                 <div>
                     <p>{message}</p>
                     <Link to="/play">
-                        <button>play</button>
+                        <button>Play</button>
                     </Link>
                     <Link to="/leaderboard">
                         <button>Leaderboard</button>
