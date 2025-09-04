@@ -5,19 +5,20 @@
   text-align: center;
 }
 
-input {
+input , textarea{
   display: block;
   width: 200px;
   height: 30px;
   font-size: 16px;
-  margin: 5px 0;
+  margin: 5px auto;   
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
 
+
 p {
-  color: #22006a;
+  color: rgb(193, 3, 3);
   margin: 15px 0;
   font-weight: bold; 
   font-size: 25px;   
